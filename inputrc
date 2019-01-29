@@ -1,0 +1,13 @@
+set editing-mode vi
+set keymap vi-command
+set keymap vi-insert
+
+set show-all-if-ambiguous on
+set show-all-if-unmodified on
+set completion-prefix-display-length 3
+
+set show-mode-in-prompt On
+set vi-cmd-mode-string [c]
+set vi-ins-mode-string [i]
+set mark-modified-lines on
+
