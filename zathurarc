@@ -1,0 +1,5 @@
+set first-page-column 1:1
+# set recolor-keephue true
+set recolor-darkcolor \#c6c86c
+set recolor-lightcolor \#005500
+set inputbar-bg \#151515
