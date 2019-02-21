@@ -22,8 +22,7 @@ set splitbelow
 let @l='o* '
 " markdown: make selection bold, use when something is visually selected
 let @b='s****hP'
-" markdown: surround with backticks (they need three keypresses to produce, 'orrible)
-" use when something is visually selected
+" markdown: surround with backticks, use when something is visually selected
 let @c='s``P'
 " markdown: make selection italic, use when something is visually selected
 let @i='s__P'
@@ -87,4 +86,4 @@ let g:airline#extensions#tabline#enabled = 1
 
 " noremap <silent> <F3> :NERDTreeToggle<CR>
 " nnoremap <leader>
-" nnoremap <silent> <leader><Space> :NERDTreeToggle<CR>
+nnoremap <silent> <leader><Space> :NERDTreeToggle<CR>
