@@ -227,6 +227,8 @@ bindsym $mod+Shift+Ctrl+K exec "dbus-send --print-reply --dest=org.mpris.MediaPl
 bindsym $mod+Shift+Ctrl+G exec "firefox https://gmail.com"
 # open facebook quickly
 bindsym $mod+Shift+Ctrl+F exec "firefox https://facebook.com"
+# open github repos quickly
+bindsym $mod+Shift+Ctrl+H exec "firefox https://github.com/razofz?tab=repositories"
 
 # Make the currently focused window a scratchpad 
 bindsym $mod+Shift+minus move scratchpad 
@@ -243,6 +245,8 @@ bindsym Print exec spectacle
 # Printscreen selection of screen
 # bindsym Ctrl+Print exec scrot -s -e 'mv $f /tmp/ && gimp /tmp/$f' --release
 bindsym Ctrl+Print exec spectacle -r
+
+popup_during_fullscreen smart
 
 ########################################################################
 # i3-gaps
