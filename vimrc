@@ -64,6 +64,9 @@ nnoremap <Leader>e :e **/*
 nnoremap <Leader>v :vs **/*
 nnoremap <Leader>s :sp **/*
 
+" Quick jump to previous buffer
+nnoremap <Leader>p :b #<CR>
+
 " use wildmenu, i. e. show possible completions for :e, :sp, :vsp etc
 " https://gist.github.com/csswizardry/9a33342dace4786a9fee35c73fa5deeb
 set wmnu
