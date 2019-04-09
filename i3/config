@@ -222,14 +222,6 @@ bindsym $mod+Shift+Ctrl+O exec "dbus-send --print-reply --dest=org.mpris.MediaPl
 bindsym $mod+Shift+Ctrl+K exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
 # https://gist.github.com/iiSeymour/5941055
 
-
-# open gmail quickly
-bindsym $mod+Shift+Ctrl+G exec "firefox https://gmail.com"
-# open facebook quickly
-bindsym $mod+Shift+Ctrl+F exec "firefox https://facebook.com"
-# open github repos quickly
-bindsym $mod+Shift+Ctrl+H exec "firefox https://github.com/razofz?tab=repositories"
-
 # Make the currently focused window a scratchpad 
 bindsym $mod+Shift+minus move scratchpad 
 # Show the first scratchpad window 
@@ -247,6 +239,28 @@ bindsym Print exec spectacle
 bindsym Ctrl+Print exec spectacle -r
 
 popup_during_fullscreen smart
+
+########################################################################
+# program/web page launch mode
+########################################################################
+# Press $mod+o followed by designated launch keys, or Escape/Return to launch
+# programs or return to the default mode, respectively.
+set $mode_launcher Launch: [w]eb [g]mail [f]acebook [h]:github-repositories
+bindsym $mod+o mode "$mode_launcher"
+
+mode "$mode_launcher" {
+    bindsym w exec firefox
+
+    # open gmail quickly
+    bindsym g exec "firefox https://gmail.com"
+    # open facebook quickly
+    bindsym f exec "firefox https://facebook.com"
+    # open github repos quickly
+    bindsym h exec "firefox https://github.com/razofz?tab=repositories"
+
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+}
 
 ########################################################################
 # i3-gaps
