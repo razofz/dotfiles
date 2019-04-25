@@ -18,8 +18,9 @@ set splitbelow
 
 " markdown stuff
 """"""""""""""""
-" good when writing markdown lists
-let @l='o* '
+" markdown: quickly insert link list item, and paste from register + inside
+" the brackets
+let @l='o- \url{}"+P'
 " markdown: make selection bold, use when something is visually selected
 let @b='s****hP'
 " markdown: surround with backticks, use when something is visually selected
