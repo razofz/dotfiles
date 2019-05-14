@@ -21,6 +21,8 @@ set splitbelow
 " markdown: quickly insert link list item, and paste from register + inside
 " the brackets
 let @l='o- \url{}"+P'
+" markdown: quickly yank link from list item to register +
+let @l='"+yi}'
 " markdown: make selection bold, use when something is visually selected
 let @b='s****hP'
 " markdown: surround with backticks, use when something is visually selected
