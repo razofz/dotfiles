@@ -22,7 +22,7 @@ set splitbelow
 " the brackets
 let @l='o- \url{}"+P'
 " markdown: quickly yank link from list item to register +
-let @l='"+yi}'
+let @y='"+yi}'
 " markdown: make selection bold, use when something is visually selected
 let @b='s****hP'
 " markdown: surround with backticks, use when something is visually selected
