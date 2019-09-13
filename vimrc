@@ -4,6 +4,10 @@ set nu
 set autoindent
 " set linebreak
 
+" longer history of commands used, 50 are not that much when you're in the
+" middle of something and after a while want to save the useful commands
+set history=1000
+
 " highlighting stuff
 set hlsearch
 nnoremap <Leader>h :noh<CR>
@@ -15,6 +19,9 @@ match OverLength /\%81v.\+/
 " 'sensible' splits
 set splitright
 set splitbelow
+
+" edit .vimrc
+nnoremap <silent> <Leader>r :e ~/.vimrc<CR>
 
 " markdown stuff
 """"""""""""""""
@@ -41,7 +48,6 @@ let @x='$0exxhxhxhx$xxxx'
 
 filetype plugin indent on
 """"""""""""""""""""""""""""""""
-
 
 " for traversing visual lines and not actual lines
 nnoremap j gj
@@ -93,3 +99,4 @@ let g:airline#extensions#tabline#enabled = 1
 " noremap <silent> <F3> :NERDTreeToggle<CR>
 " nnoremap <leader>
 nnoremap <silent> <leader><Space> :NERDTreeToggle<CR>
+
