@@ -265,6 +265,26 @@ mode "$mode_launcher" {
 }
 
 ########################################################################
+# keyboard layout selection mode
+########################################################################
+# Press $mod+b followed by designated keyboard layout keys,
+# or Escape/Return to return to the default mode.
+set $keyboard_selector Select keyboard layout: [u]s [r]az [s]wedish
+bindsym $mod+b mode "$keyboard_selector"
+
+mode "$keyboard_selector" {
+    # us layout, international variant
+    bindsym u exec "setxkbmap us -variant intl; echo 'us' > ~/.keyboard_layout"
+    # raz layout (us with only swedish keys added)
+    bindsym r exec "setxkbmap raz; echo 'raz' > ~/.keyboard_layout"
+    # swedish layout, no dead keys
+    bindsym s exec "setxkbmap se -variant nodeadkeys; echo 'se' > ~/.keyboard_layout"
+
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+}
+
+########################################################################
 # i3-gaps
 ########################################################################
 
@@ -288,12 +308,12 @@ mode "$mode_gaps" {
 }
 
 mode "$mode_gaps_inner" {
-	bindsym plus  gaps inner current plus 5
-	bindsym minus gaps inner current minus 5
+	bindsym Shift+plus  gaps inner current plus 5
+	bindsym Shift+minus gaps inner current minus 5
 	bindsym 0     gaps inner current set 0
 
-	bindsym Shift+plus  gaps inner all plus 5
-	bindsym Shift+minus gaps inner all minus 5
+	bindsym Shift+Ctrl+plus  gaps inner all plus 5
+	bindsym Shift+Ctrl+minus gaps inner all minus 5
 	bindsym Shift+0     gaps inner all set 0
 
 	bindsym Return mode "default"
@@ -301,12 +321,12 @@ mode "$mode_gaps_inner" {
 }
 
 mode "$mode_gaps_outer" {
-	bindsym plus  gaps outer current plus 5
-	bindsym minus gaps outer current minus 5
+	bindsym Shift+plus  gaps outer current plus 5
+	bindsym Shift+minus gaps outer current minus 5
 	bindsym 0     gaps outer current set 0
 
-	bindsym Shift+plus  gaps outer all plus 5
-	bindsym Shift+minus gaps outer all minus 5
+	bindsym Shift+Ctrl+plus  gaps outer all plus 5
+	bindsym Shift+Ctrl+minus gaps outer all minus 5
 	bindsym Shift+0     gaps outer all set 0
 
 	bindsym Return mode "default"
