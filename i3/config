@@ -111,9 +111,8 @@ bindsym $mod+n exec i3-input -F 'rename workspace to "%s"' -P 'New name for this
 
 # Move the current workspace to the next output 
 # (effectively toggles when you only have two outputs) 
-# bindsym $mod+x move workspace to output right
-# Change to this depending on physical placement of monitors
 bindsym $mod+x move workspace to output up
+bindsym $mod+c move workspace to output right
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
