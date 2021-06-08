@@ -9,7 +9,7 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod1
+set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -44,17 +44,32 @@ bindsym $mod+Shift+q kill
 # installed.
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
+hide_edge_borders both
+default_border normal 1
+title_align center
+#for_window [class=".*"] title_format "<b>%title</b>"
+
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
+# backup navigation
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
 
 # move focused window
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
+# backup navigation
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
 bindsym $mod+g split h
@@ -65,8 +80,7 @@ bindsym $mod+v split v
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
+# change container layout (tabbed, toggle split)
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
@@ -78,6 +92,12 @@ bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
+
+# mouse buttons
+# back in history button
+bindsym --whole-window button6 exec xdotool key alt+Left
+# forward in history button
+bindsym --whole-window button7 exec xdotool key alt+Right
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -111,8 +131,7 @@ bindsym $mod+n exec i3-input -F 'rename workspace to "%s"' -P 'New name for this
 
 # Move the current workspace to the next output 
 # (effectively toggles when you only have two outputs) 
-bindsym $mod+x move workspace to output up
-bindsym $mod+c move workspace to output right
+bindsym $mod+x move workspace to output left
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -157,71 +176,95 @@ bindsym $mod+Ctrl+l exec i3lock-fancy -- scrot -z
 new_window normal
 focus_follows_mouse no
 
-exec --no-startup-id /usr/bin/compton -b
+exec --no-startup-id /usr/bin/compton -b &
+exec_always --no-startup-id /bin/bash /home/raz/.scripts/monitor.sh &
+exec --no-startup-id dropbox start &> /dev/null &
 
 # For keyboard shenanigans
-exec --no-startup-id setxkbmap se -variant nodeadkeys &
-exec --no-startup-id setxkbmap -option ctrl:nocaps &
-exec --no-startup-id setxkbmap -option compose:lwin &
-exec --no-startup-id xcape -e 'Control_L=Escape' & 
+exec_always sleep 1 && setxkbmap us &
+# exec_always sleep 1 && setxkbmap -option ctrl:nocaps &
+# exec --no-startup-id setxkbmap -option compose:lwin &
+#  exec_always sleep 1 && xcape -e 'Control_L=Escape' &
 
 # For wacom tablet
-exec --no-startup-id setwacom set "Wacom Intuos BT S Pad pad" Button 1 key "Esc"
-exec --no-startup-id setwacom set "Wacom Intuos BT S Pad pad" Button 2 key "Down"
-exec --no-startup-id setwacom set "Wacom Intuos BT S Pad pad" Button 3 key "Up"
-
-# For touchpad tap-to-click
-exec --no-startup-id xinput set-prop 11 286 1
-exec --no-startup-id xinput set-prop 11 278 1
+# exec --no-startup-id setwacom set "Wacom Intuos BT S Pad pad" Button 1 key "Esc"
+# exec --no-startup-id setwacom set "Wacom Intuos BT S Pad pad" Button 2 key "Down"
+# exec --no-startup-id setwacom set "Wacom Intuos BT S Pad pad" Button 3 key "Up"
 
 # Polkit agent, mostly for Etcher
 exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
-
-# exec_always --no-startup-id /home/raz/.config/polybar/launch.sh
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
 	# i3bar_command i3bar -t
-        status_command i3status
+        # status_command /home/raz/anaconda3/bin/py3status -c ~/.config/py3status/config
+        status_command ~/prg/bumblebee-status/bumblebee-status \
+		-m apt spotify cpu memory nvidiagpu disk layout datetime \
+		-p datetime.format="%Y-%m-%d %H:%M:%S" disk.path=/ \
+		-t iceberg-dark-powerline
+		#-t gruvbox-powerline
+		#-t solarized-dark-awesome
+		#-t defaultfirefox-dark-powerline
+		#-t greyish-powerline
+		#-t gruvbox
+		#-t gruvbox-light
+		#-t gruvbox-powerline-light
+		#-t iceberg
+		#-t iceberg-powerline
+		#-t iceberg-rainbow
+		#-t onedark-powerline
+		#-t powerline
+		#-t sac_red
+		#-t solarized
+		#-t solarized-dark-awesome
+		#-t solarized-powerline
+		#-t wal-powerline
+	
 	mode hide #dock|hide|invisible
-	modifier Mod1
+	modifier $mod
 	hidden_state hide # hide|show
 	position bottom # bottom|top
-	colors {
-		background #116611
-		separator #000000
-		statusline #d3d3d3
-		focused_workspace #aaaaaaa #55bb55 #eeeeee
-		active_workspace #555555 #333333 #aaaaaa
-		inactive_workspace #555555 #333333 #aaaaaa
-		urgent_workspace #eb709b #eb709b #ffffff
-	}
+	# colors {
+		# background #116611
+		# separator #000000
+		# statusline #d3d3d3
+		# focused_workspace #aaaaaaa #55bb55 #eeeeee
+		# active_workspace #555555 #333333 #aaaaaa
+		# inactive_workspace #555555 #333333 #aaaaaa
+		# urgent_workspace #eb709b #eb709b #ffffff
+	# }
 }
 
 # class                 border  backgr. text    indicator child_border
-client.focused          #228822 #116611 #000001 #55bb55   #228822
-client.focused_inactive #333333 #115511 #000000 #484e50   #114411
-client.unfocused        #333333 #115511 #000000 #292d2e   #114411
+client.focused          #666666 #666666 #000001 #aaaaaa   #666666
+client.focused_inactive #333333 #555555 #000000 #484e50   #333333
+client.unfocused        #333333 #444444 #000000 #292d2e   #222222
 # client.urgent           #2f343a #900000 #ffffff #900000   #900000
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
 # client.background       #ffffff
 
-bindsym XF86AudioRaiseVolume exec "amixer -q sset Master,0 3+ unmute"
-bindsym XF86AudioLowerVolume exec "amixer -q sset Master,0 3- unmute"
+# bindsym XF86AudioRaiseVolume exec "amixer -q sset Master,0 3+ unmute"
+# bindsym XF86AudioLowerVolume exec "amixer -q sset Master,0 3- unmute"
 # bindsym XF86AudioMute exec "amixer -q sset Master,0 toggle"
-bindsym XF86AudioMute exec "amixer -qD pulse set Master toggle"
+# bindsym XF86AudioMute exec "amixer -qD pulse set Master toggle"
+
+set $sink `pactl list short sinks | cut -f1`
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume $sink +10% 
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume $sink -10%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute $sink toggle
 
 bindsym XF86MonBrightnessUp exec "xbacklight + 10"
 bindsym XF86MonBrightnessDown exec "xbacklight - 10"
 
 # Play/pause Spotify
-bindsym $mod+Shift+Ctrl+P exec "qdbus org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
+# bindsym $mod+Shift+Ctrl+I exec "qdbus org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
+bindsym XF86AudioPlay exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
 # Next song in Spotify
-bindsym $mod+Shift+Ctrl+O exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
+bindsym XF86AudioNext exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
 # Previous song in Spotify
-bindsym $mod+Shift+Ctrl+K exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
+bindsym XF86AudioPrev exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
 # https://gist.github.com/iiSeymour/5941055
 
 # Make the currently focused window a scratchpad 
@@ -243,6 +286,85 @@ bindsym Ctrl+Print exec spectacle -r
 popup_during_fullscreen smart
 
 ########################################################################
+# workspace switcher mode
+########################################################################
+set $mode_workspace "goto_ws"
+mode $mode_workspace {
+    # numbers row
+    bindsym 1 workspace number 1; mode "default"
+    bindsym 2 workspace number 2; mode "default"
+    bindsym 3 workspace number 3; mode "default"
+    bindsym 4 workspace number 4; mode "default"
+    bindsym 5 workspace number 5; mode "default"
+    bindsym 6 workspace number 6; mode "default"
+    bindsym 7 workspace number 7; mode "default"
+    bindsym 8 workspace number 8; mode "default"
+    bindsym 9 workspace number 9; mode "default"
+    bindsym 0 workspace number 0; mode "default"
+    # top row
+    bindsym q workspace q; mode "default"
+    bindsym w workspace w; mode "default"
+    bindsym e workspace e; mode "default"
+    bindsym t workspace t; mode "default"
+    bindsym y workspace y; mode "default"
+    bindsym u workspace u; mode "default"
+    bindsym i workspace i; mode "default"
+    bindsym o workspace o; mode "default"
+    bindsym p workspace p; mode "default"
+    # middle row
+    bindsym a workspace a; mode "default"
+    bindsym s workspace s; mode "default"
+    bindsym d workspace d; mode "default"
+    bindsym f workspace f; mode "default"
+    bindsym g workspace g; mode "default"
+    bindsym h workspace h; mode "default"
+    bindsym j workspace j; mode "default"
+    bindsym k workspace k; mode "default"
+    bindsym l workspace l; mode "default"
+    # exit
+    bindsym Escape mode "default"
+}
+bindsym $mod+s mode $mode_workspace
+
+set $mode_move_to_workspace "moveto_ws"
+mode $mode_move_to_workspace {
+    # numbers row
+    bindsym 1 move container to workspace number 1; mode "default"
+    bindsym 2 move container to workspace number 2; mode "default"
+    bindsym 3 move container to workspace number 3; mode "default"
+    bindsym 4 move container to workspace number 4; mode "default"
+    bindsym 5 move container to workspace number 5; mode "default"
+    bindsym 6 move container to workspace number 6; mode "default"
+    bindsym 7 move container to workspace number 7; mode "default"
+    bindsym 8 move container to workspace number 8; mode "default"
+    bindsym 9 move container to workspace number 9; mode "default"
+    bindsym 0 move container to workspace number 0; mode "default"
+    # top row
+    bindsym q move container to workspace q; mode "default"
+    bindsym w move container to workspace w; mode "default"
+    bindsym e move container to workspace e; mode "default"
+    bindsym r move container to workspace r; mode "default"
+    bindsym t move container to workspace t; mode "default"
+    bindsym y move container to workspace y; mode "default"
+    bindsym u move container to workspace u; mode "default"
+    bindsym i move container to workspace i; mode "default"
+    bindsym o move container to workspace o; mode "default"
+    bindsym p move container to workspace p; mode "default"
+    # middle row
+    bindsym a move container to workspace a; mode "default"
+    bindsym s move container to workspace s; mode "default"
+    bindsym d move container to workspace d; mode "default"
+    bindsym f move container to workspace f; mode "default"
+    bindsym g move container to workspace g; mode "default"
+    bindsym h move container to workspace h; mode "default"
+    bindsym j move container to workspace j; mode "default"
+    bindsym k move container to workspace k; mode "default"
+    bindsym l move container to workspace l; mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+shift+s mode $mode_move_to_workspace
+
+########################################################################
 # program/web page launch mode
 ########################################################################
 # Press $mod+o followed by designated launch keys, or Escape/Return to launch
@@ -254,11 +376,11 @@ mode "$mode_launcher" {
     bindsym w exec firefox
 
     # open gmail quickly
-    bindsym g exec "firefox https://gmail.com"
+    bindsym g exec "firefox https://gmail.com"; mode "default"
     # open facebook quickly
-    bindsym f exec "firefox https://facebook.com"
+    bindsym f exec "firefox https://facebook.com"; mode "default"
     # open github repos quickly
-    bindsym h exec "firefox https://github.com/razofz?tab=repositories"
+    bindsym h exec "firefox https://github.com/razofz?tab=repositories"; mode "default"
 
     bindsym Escape mode "default"
     bindsym Return mode "default"
@@ -274,11 +396,11 @@ bindsym $mod+b mode "$keyboard_selector"
 
 mode "$keyboard_selector" {
     # us layout, international variant
-    bindsym u exec "setxkbmap us -variant intl; echo 'us' > ~/.keyboard_layout"
+    bindsym u exec "setxkbmap us ; echo 'us' > ~/.keyboard_layout"; mode "default"
     # raz layout (us with only swedish keys added)
-    bindsym r exec "setxkbmap raz; echo 'raz' > ~/.keyboard_layout"
+    bindsym r exec "setxkbmap raz; echo 'raz' > ~/.keyboard_layout"; mode "default"
     # swedish layout, no dead keys
-    bindsym s exec "setxkbmap se -variant nodeadkeys; echo 'se' > ~/.keyboard_layout"
+    bindsym s exec "setxkbmap se -variant nodeadkeys; echo 'se' > ~/.keyboard_layout"; mode "default"
 
     bindsym Escape mode "default"
     bindsym Return mode "default"
@@ -288,7 +410,7 @@ mode "$keyboard_selector" {
 # i3-gaps
 ########################################################################
 
-for_window [class="^.*"] border pixel 3
+# for_window [class="^.*"] border pixel 3
 
 # hide_edge_borders none #smart_no_gaps
 # smart_borders yes # no_gaps #on
@@ -332,3 +454,11 @@ mode "$mode_gaps_outer" {
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
 }
+
+
+########################################################################
+# misc
+########################################################################
+
+exec --no-startup-id "eval `ssh-agent -s -t 6000`"
+exec --no-startup-id nitrogen --restore &
