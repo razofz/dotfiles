@@ -122,6 +122,7 @@ let g:jedi#goto_stubs_command = "<leader>t"
 " let g:jedi#documentation_command = "K"
 let g:jedi#usages_command = "<leader>n"
 " let g:jedi#completions_command = "<C-Space>"
+let g:jedi#auto_close_doc = 0
 let g:jedi#rename_command = "<leader>f"
 let g:jedi#popup_on_dot = 1 " set to 0 for don't auto-show completions, slow
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
