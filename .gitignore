@@ -1,1 +1,6 @@
 *.swp
+vim/autoload
+vim/black
+vim/plugged
+vim/view
+vim/.netrwhist
