@@ -10,6 +10,7 @@ colo raz
 set nu
 set autoindent
 " set linebreak
+set background=dark
 
 " longer history of commands used, 50 are not that much when you're in the
 " middle of something and after a while want to save the useful commands
@@ -29,6 +30,10 @@ set splitbelow
 
 " edit .vimrc
 nnoremap <silent> <Leader>r :e ~/.vimrc<CR>
+" reload vimrc
+nnoremap <Leader>R :so ~/.vimrc<CR>
+
+filetype plugin indent on
 
 " markdown stuff
 """"""""""""""""
@@ -44,7 +49,6 @@ let @b='s****hP'
 let @c='s``P'
 " markdown: make selection italic, use when something is visually selected
 let @i='s__P'
-
 """"""""""""""""""""""""""""""""
 
 " html stuff
@@ -53,8 +57,6 @@ let @i='s__P'
 let @z='$I<!-- A -->'
 " uncommenting
 let @x='$0exxhxhxhx$xxxx'
-
-filetype plugin indent on
 """"""""""""""""""""""""""""""""
 
 " for traversing visual lines and not actual lines
@@ -86,6 +88,15 @@ nnoremap <Leader>p :b #<CR>
 " Cycle to next tab (due to tmux intercepting the keystroke)
 nnoremap <Leader>t :tabn<CR>
 
+" allow mouse use
+set mouse=a
+" allow mouse use in tmux as well. (on work tower is sgr in standard terminal,
+" xterm2 in tmux). Combined with mouse mode on/off bindings in .tmux.conf
+" (does not seem to be really needed, though. Still nice.)
+if (!has('nvim'))
+	set ttymouse=sgr
+endif
+
 " use wildmenu, i. e. show possible completions for :e, :sp, :vsp etc
 " https://gist.github.com/csswizardry/9a33342dace4786a9fee35c73fa5deeb
 set wmnu
@@ -98,6 +109,20 @@ set wildignore+=*.pdf,*.aux,*.dvi,*.bcf
 nnoremap <C-S> <Esc>:w<CR>
 inoremap <C-S> <C-O>:w<CR>
 vnoremap <C-S> <Esc>:w<CR>gv
+
+if has("persistent_undo")
+   let target_path = expand('~/.undodir')
+
+    " create the directory and any parent directories
+    " if the location does not exist.
+    if !isdirectory(target_path)
+        call mkdir(target_path, "p", 0700)
+    endif
+
+    let &undodir=target_path
+    set undofile
+endif
+
 
 " related to wildmenu, if this is enabled Vim keep tracks of current file's directory
 " set autochdir
