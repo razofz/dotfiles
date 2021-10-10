@@ -25,3 +25,14 @@ highlight StatusLine ctermfg=Black ctermbg=DarkGreen cterm=none guifg=#ffff00 gu
 highlight Normal	ctermfg=White									  guifg=#ffffff guibg=#000000
 highlight Search				ctermbg=DarkBlue							guibg=#c0c000
 hi LineNr	ctermfg=DarkGray
+highlight Folded	ctermfg=green	ctermbg=darkgray
+highlight Pmenu	ctermfg=black	ctermbg=darkgray
+highlight PmenuSel	ctermfg=black	ctermbg=brown
+
+highlight GitGutterAdd    ctermfg=green
+highlight GitGutterChange ctermfg=yellow
+highlight GitGutterDelete ctermfg=darkred
+highlight GitGutterAddLineNr	ctermfg=green          " default: links to CursorLineNr
+highlight GitGutterChangeLineNr	ctermfg=yellow       " default: links to CursorLineNr
+highlight GitGutterDeleteLineNr	ctermfg=darkred       " default: links to CursorLineNr
+
