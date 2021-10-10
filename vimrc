@@ -183,6 +183,14 @@ let g:NERDTreeGitStatusShowIgnored = 1 " a heavy feature may cost much more time
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" auto-install vim-plug if not installed
+" https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
+let data_dir = '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin()
 
 Plug 'snakemake/snakemake', {'rtp': 'misc/vim'}
