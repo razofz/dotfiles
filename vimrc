@@ -18,7 +18,6 @@ set history=1000
 
 " highlighting stuff
 set hlsearch
-nnoremap <Leader>h :noh<CR>
 
 " highlighting when line is over 80 characters
 " highlight OverLength ctermbg=red ctermfg=white guibg=#592929 
@@ -203,6 +202,9 @@ Plug 'tpope/vim-commentary'
 Plug 'mbbill/undotree'
 Plug 'ekalinin/dockerfile.vim'
 Plug 'mhinz/vim-startify'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'preservim/nerdtree'
 Plug 'xuyuanp/nerdtree-git-plugin'
 Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 
@@ -232,7 +234,6 @@ Plug 'ncm2/ncm2-github'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 
 " for Nvim-R
 " https://github.com/jamespeapen/Nvim-R/wiki/options#assignment-operator-and-rnoweb-completion-of-code-block
