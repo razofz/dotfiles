@@ -1,3 +1,8 @@
+let g:python_host_prog="/home/raz/anaconda3/envs/vim-python2/bin/python"
+let g:python3_host_prog="/home/raz/anaconda3/envs/vim-python3/bin/python"
+let g:node_host_prog = "/home/raz/anaconda3/envs/vim-nodejs/bin/node"
+" let g:black_virtualenv = g:python3_host_prog
+
 let mapleader=" "
 
 colo raz
@@ -98,19 +103,20 @@ vnoremap <C-S> <Esc>:w<CR>gv
 " set autochdir
 
 let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#left_sep = ' '
-" let g:airline#extensions#tabline#left_alt_sep = '>'
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '>'
 let g:airline_theme='distinguished'
+let g:airline_powerline_fonts = 1
 
 " noremap <silent> <F3> :NERDTreeToggle<CR>
 " nnoremap <leader>
 nnoremap <silent> <leader><Space> :NERDTreeToggle<CR>
 
 " snakemake
-au BufNewFile,BufRead Snakefile set syntax=snakemake  | set filetype=snakemake
-au BufNewFile,BufRead *.rules set syntax=snakemake | set filetype=snakemake
-au BufNewFile,BufRead *.snakefile set syntax=snakemake | set filetype=snakemake
-au BufNewFile,BufRead *.snake set syntax=snakemake | set filetype=snakemake
+" au BufNewFile,BufRead Snakefile set syntax=snakemake  | set filetype=snakemake
+" au BufNewFile,BufRead *.rules set syntax=snakemake | set filetype=snakemake
+" au BufNewFile,BufRead *.snakefile set syntax=snakemake | set filetype=snakemake
+" au BufNewFile,BufRead *.snake set syntax=snakemake | set filetype=snakemake
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " jedi-vim
@@ -127,68 +133,85 @@ let g:jedi#rename_command = "<leader>f"
 let g:jedi#popup_on_dot = 1 " set to 0 for don't auto-show completions, slow
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" sample settings for vim-r-plugin and screen.vim
-" Installation
-"       - Place plugin file under ~/.vim/
-"       - To activate help, type in vim :helptags ~/.vim/doc
-"       - Place the following vim conf lines in .vimrc
-" Usage
-"       - Read intro/help in vim with :h vim-r-plugin or :h screen.txt
-"       - To initialize vim/R session, start screen/tmux, open some *.R file in vim and then hit F2 key
-"       - Object/omni completion command CTRL-X CTRL-O
-"       - To update object list for omni completion, run :RUpdateObjList
-" My favorite Vim/R window arrangement
-"	tmux attach
-"	Open *.R file in Vim and hit F2 to open R
-"	Go to R pane and create another pane with C-a %
-"	Open second R session in new pane
-"	Go to vim pane and open a new viewport with :split *.R
-" Useful tmux commands
-"       tmux new -s <myname>       start new session with a specific name
-"	tmux ls (C-a-s)            list tmux session
-"       tmux attach -t <id>        attach to specific session
-"       tmux kill-session -t <id>  kill specific session
-" 	C-a-: kill-session         kill a session
-" 	C-a %                      split pane vertically
-"       C-a "                      split pane horizontally
-" 	C-a-o                      jump cursor to next pane
-"	C-a C-o                    swap panes
-" 	C-a-: resize-pane -L 10    resizes pane by 10 to left (L R U D)
-" Corresponding Vim commands
-" 	:split or :vsplit      split viewport
-" 	C-w-w                  jump cursor to next pane-
-" 	C-w-r                  swap viewports
-" 	C-w C-++               resize viewports to equal split
-" 	C-w 10+                increase size of current pane by value
+" for gitgutter plugin
+set updatetime=100
+nnoremap <silent> <leader>g :GitGutterToggle<CR>
+let g:gitgutter_set_sign_backgrounds = 1
 
-" To open R in terminal rather than RGui (only necessary on OS X)
-" let vimrplugin_applescript = 0
-" let vimrplugin_screenplugin = 0
-" For tmux support
-let g:ScreenImpl = 'Tmux'
-let vimrplugin_screenvsplit = 1 " For vertical tmux split
-let g:ScreenShellInitialFocus = 'shell'
-" instruct to use your own .screenrc file
-let g:vimrplugin_noscreenrc = 1
-" For integration of r-plugin with screen.vim
-let g:vimrplugin_screenplugin = 1
-" Don't use conque shell if installed
-let vimrplugin_conqueplugin = 0
-" map the letter 'r' to send visually selected lines to R
-let g:vimrplugin_map_r = 1
-" see R documentation in a Vim buffer
-let vimrplugin_vimpager = "no"
-"set expandtab
-set shiftwidth=4
-set tabstop=8
-" start R with F2 key
-map <F2> <Plug>RStart
-imap <F2> <Plug>RStart
-vmap <F2> <Plug>RStart
-" send selection to R with space bar
-vmap <Space> <Plug>RDSendSelection
-" send line to R with space bar
-nmap <Space> <Plug>RDSendLine
+" for undotree plugin
+nnoremap <F6> :UndotreeToggle<CR>
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+                \ 'Modified'  :'✹',
+                \ 'Staged'    :'✚',
+                \ 'Untracked' :'✭',
+                \ 'Renamed'   :'➜',
+                \ 'Unmerged'  :'═',
+                \ 'Deleted'   :'✖',
+                \ 'Dirty'     :'✗',
+                \ 'Ignored'   :'☒',
+                \ 'Clean'     :'✔︎',
+                \ 'Unknown'   :'?',
+                \ }
+let g:NERDTreeGitStatusUseNerdFonts = 1 " you should install nerdfonts by yourself. default: 0
+let g:NERDTreeGitStatusShowIgnored = 1 " a heavy feature may cost much more time. default: 0
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+call plug#begin()
+
+Plug 'snakemake/snakemake', {'rtp': 'misc/vim'}
+Plug 'snakemake/snakefmt'
+" Plug 'davidhalter/jedi-vim'
+Plug 'psf/black'
+Plug 'jrudess/vim-foldtext'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-commentary'
+Plug 'mbbill/undotree'
+Plug 'ekalinin/dockerfile.vim'
+Plug 'mhinz/vim-startify'
+Plug 'xuyuanp/nerdtree-git-plugin'
+Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
+
+" If you don't have nodejs and yarn
+" use pre build, add 'vim-plug' to the filetype list so vim-plug can update
+" this plugin
+" see: https://github.com/iamcco/markdown-preview.nvim/issues/50
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+
+Plug 'jalvesaq/Nvim-R'
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+Plug 'gaalcaras/ncm-R'
+Plug 'ncm2/ncm2-jedi'
+" Vim 8 only
+if !has('nvim')
+	Plug 'roxma/vim-hug-neovim-rpc'
+endif
+Plug 'wellle/tmux-complete.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+Plug 'ncm2/ncm2-vim-lsp'
+Plug 'ncm2/ncm2-github'
+
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+
+call plug#end()
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+" for Nvim-R
+" https://github.com/jamespeapen/Nvim-R/wiki/options#assignment-operator-and-rnoweb-completion-of-code-block
+let R_assign = 2
+
+" enable ncm2 for all buffers
+if has('nvim')
+	autocmd BufEnter * call ncm2#enable_for_buffer()
+endif
+
+" IMPORTANT: :help Ncm2PopupOpen for more information
+set completeopt=noinsert,menuone,noselect
+
+" can `set foldcolumn=2` [0-12] to show how folds are defined 
+nnoremap <Leader>h :noh<CR>
