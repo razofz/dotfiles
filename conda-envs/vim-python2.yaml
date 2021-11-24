@@ -1,0 +1,56 @@
+name: vim-python2
+channels:
+  - https://conda.anaconda.org/gurobi
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - _libgcc_mutex=0.1=conda_forge
+  - _openmp_mutex=4.5=1_gnu
+  - brotlipy=0.7.0=py27h516909a_1000
+  - ca-certificates=2021.10.8=ha878542_0
+  - certifi=2019.11.28=py27h8c360ce_1
+  - cffi=1.14.0=py27hd463f26_0
+  - chardet=3.0.4=py27h8c360ce_1006
+  - colorama=0.4.4=pyh9f0ad1d_0
+  - conda=4.8.3=py27h8c360ce_1
+  - conda-package-handling=1.6.0=py27hdf8410d_2
+  - cryptography=2.8=py27h2c19f6a_2
+  - enum34=1.1.10=py27h8c360ce_1
+  - futures=3.3.0=py27h8c360ce_1
+  - greenlet=0.4.15=py27hdf8410d_1
+  - idna=2.10=pyh9f0ad1d_0
+  - ipaddress=1.0.23=py_0
+  - ld_impl_linux-64=2.36.1=hea4e1c9_2
+  - libffi=3.2.1=he1b5a44_1007
+  - libgcc-ng=11.2.0=h1d223b6_11
+  - libgomp=11.2.0=h1d223b6_11
+  - libsolv=0.7.19=h780b84a_5
+  - libstdcxx-ng=11.2.0=he4da1e4_11
+  - libzlib=1.2.11=h36c2ea0_1013
+  - mamba=0.1.0=py27hc9558a2_2
+  - msgpack-python=1.0.0=py27h9e3301b_1
+  - ncurses=6.2=h58526e2_4
+  - openssl=1.1.1l=h7f98852_0
+  - pip=20.1.1=pyh9f0ad1d_0
+  - pycosat=0.6.3=py27hdf8410d_1004
+  - pycparser=2.20=pyh9f0ad1d_2
+  - pynvim=0.4.1=py27h8c360ce_1
+  - pyopenssl=19.1.0=py_1
+  - pysocks=1.7.1=py27h8c360ce_1
+  - python=2.7.15=h5a48372_1011_cpython
+  - python_abi=2.7=1_cp27mu
+  - readline=8.1=h46c0cb4_0
+  - requests=2.25.1=pyhd3deb0d_0
+  - ruamel_yaml=0.15.80=py27hdf8410d_1001
+  - setuptools=44.0.0=py27_0
+  - six=1.16.0=pyh6c4a22f_0
+  - sqlite=3.36.0=h9cd32fc_2
+  - tk=8.6.11=h27826a3_1
+  - tqdm=4.62.3=pyhd8ed1ab_0
+  - trollius=2.2.post1=py27h516909a_0
+  - urllib3=1.26.7=pyhd8ed1ab_0
+  - wheel=0.37.0=pyhd8ed1ab_1
+  - yaml=0.2.5=h516909a_0
+  - zlib=1.2.11=h36c2ea0_1013
+prefix: /home/raz/anaconda3/envs/vim-python2
