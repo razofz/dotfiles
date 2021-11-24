@@ -1,6 +1,7 @@
 let g:python_host_prog="/home/raz/anaconda3/envs/vim-python2/bin/python"
 let g:python3_host_prog="/home/raz/anaconda3/envs/vim-python3/bin/python"
-let g:node_host_prog = "/home/raz/anaconda3/envs/vim-nodejs/bin/node"
+let R_path="/home/raz/anaconda3/envs/vim-R/bin/"
+" let g:node_host_prog="/home/raz/anaconda3/envs/vim-nodejs/bin/node"
 " let g:black_virtualenv = g:python3_host_prog
 
 let mapleader=" "
@@ -82,6 +83,9 @@ nnoremap <Leader>e :e **/*
 nnoremap <Leader>v :vs **/*
 nnoremap <Leader>s :sp **/*
 
+" Toggle pasteing
+nnoremap <Leader>c :set paste!<CR>
+
 " Quick jump to previous buffer
 nnoremap <Leader>p :b #<CR>
 " Cycle to next tab (due to tmux intercepting the keystroke)
@@ -127,9 +131,12 @@ endif
 " set autochdir
 
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '>'
-let g:airline_theme='distinguished'
+" let g:airline#extensions#tabline#left_sep = ' '
+" let g:airline#extensions#tabline#left_sep = '>'
+" let g:airline#extensions#tabline#left_alt_sep = '>'
+let g:airline#extensions#tabline#left_alt_sep = ''
+" let g:airline_theme='distinguished'
+let g:airline_theme='badwolf'
 let g:airline_powerline_fonts = 1
 
 " noremap <silent> <F3> :NERDTreeToggle<CR>
@@ -180,6 +187,17 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
 let g:NERDTreeGitStatusUseNerdFonts = 1 " you should install nerdfonts by yourself. default: 0
 let g:NERDTreeGitStatusShowIgnored = 1 " a heavy feature may cost much more time. default: 0
 
+
+" Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
+" - https://github.com/Valloric/YouCompleteMe
+" - https://github.com/nvim-lua/completion-nvim
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " auto-install vim-plug if not installed
@@ -206,15 +224,19 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'preservim/nerdtree'
 Plug 'xuyuanp/nerdtree-git-plugin'
-Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
+Plug 'SirVer/ultisnips'
+" Snippets are separated from the engine. Add this if you want them:
+Plug 'honza/vim-snippets'
+" Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 
 " If you don't have nodejs and yarn
 " use pre build, add 'vim-plug' to the filetype list so vim-plug can update
 " this plugin
 " see: https://github.com/iamcco/markdown-preview.nvim/issues/50
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'tmux-plugins/vim-tmux'
 
-Plug 'jalvesaq/Nvim-R'
+Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
 Plug 'gaalcaras/ncm-R'
@@ -238,6 +260,8 @@ call plug#end()
 " for Nvim-R
 " https://github.com/jamespeapen/Nvim-R/wiki/options#assignment-operator-and-rnoweb-completion-of-code-block
 let R_assign = 2
+let R_start_libs = 'base,stats,graphics,grDevices,utils,methods'
+let R_notmuxconf = 1
 
 " enable ncm2 for all buffers
 if has('nvim')

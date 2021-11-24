@@ -1,0 +1,13 @@
+export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S "
+export HISTIGNORE="ls:ps:history:pwd:fg"
+
+stty -ixon
+set -o vi
+
+export EDITOR=vim
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=-1
+HISTFILESIZE=-1
+
+alias myip='curl ifconfig.me ; echo ""'
