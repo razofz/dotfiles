@@ -1,2 +1,6 @@
-:map <buffer> <Leader>c :s/^/\/\/ /<Esc><Esc> :noh <CR>
-:map <buffer> <Leader>u :s/\/\/ // <Esc><Esc> :noh <CR>
+setlocal tabstop=2
+setlocal softtabstop=2
+setlocal shiftwidth=2
+setlocal textwidth=80
+setlocal smarttab
+setlocal expandtab
