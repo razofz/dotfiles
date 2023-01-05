@@ -1,0 +1,45 @@
+priority -20
+
+global !p
+import os
+from vimsnippets import complete
+
+FIELD_TYPES = [
+'character',
+'data.frame',
+'integer',
+'list',
+'logical',
+'matrix',
+'numeric',
+'vector']
+endglobal
+
+snippet pr "print something"
+print("$1")
+endsnippet
+
+snippet prr "print something"
+print(paste0("$1"))
+endsnippet
+
+snippet pro "print something"
+print(paste0("> $1"))
+endsnippet
+
+snippet prv "print statement and its result"
+print(paste0("> $1: ", $1))
+endsnippet
+
+snippet smk "insert a snakemake value" i
+snakemake@${1|config,input,output,wildcards,|config}[["$2"]]
+endsnippet
+
+snippet suplib "Inserts a more convenient library importage"
+lapply(list(
+  "$1",
+), FUN = function(x) {
+  suppressPackageStartupMessages(library(x, character.only = T))
+})
+endsnippet
+

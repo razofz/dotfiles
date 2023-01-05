@@ -1,0 +1,53 @@
+snippet ru "Inserts a stub for a Snakemake rule" b
+rule $1:
+	input:
+		${2:...}
+	output:
+		${3:...}
+	script:
+		"${4}"
+
+
+endsnippet
+
+snippet ruc "Inserts a stub for a Snakemake rule, with choices included" b
+rule $1:
+	input:
+		${2:in_file}="${3:...}"
+	output:
+		${4:out_file}="${5:...}"
+	${6|script,shell,run|}:
+		"${7}"
+
+
+endsnippet
+
+snippet co "Inserts a conda environment specification" b
+conda:
+	"envs/${1}"
+endsnippet
+
+# ${${4:var}${3:=}"${2}"}
+snippet pa "Inserts a new specification, can be whatever" b
+$1:
+	"${2}"
+endsnippet
+
+snippet pan "Inserts a new specification (with named variable), can be whatever" b
+$1:
+	${2:var}="${0}"
+endsnippet
+
+snippet do "Inserts a container specification" b
+container:
+	"${1|docker,shub|:docker}://${2:`whoami`}/${3:hello-world}:${4:latest}"
+endsnippet
+
+snippet conf "inserts a value from config.yaml file"
+config['${1}']
+endsnippet
+
+# snippet q
+# Your age: ${1|<18,18~60,>60|}
+# Your height: ${2|<120cm,120cm~180cm,>180cm|}
+# endsnippet
