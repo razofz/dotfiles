@@ -1,7 +1,12 @@
 export HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S "
 export HISTIGNORE="ls:ps:history:pwd:fg"
 
-stty -ixon
+# stty -ixon
+# [[ $- == *i* ]] && stty -ixon
+# https://stackoverflow.com/questions/24623021/getting-stty-standard-input-inappropriate-ioctl-for-device-when-using-scp-thro
+[[ -r ${TTY:-} && -w ${TTY:-} && $+commands[stty] == 1 ]] && stty -ixon <$TTY >$TTY
+# https://github.com/sorin-ionescu/prezto/pull/1771
+
 set -o vi
 
 export EDITOR=vim
@@ -11,3 +16,5 @@ HISTSIZE=-1
 HISTFILESIZE=-1
 
 alias myip='curl ifconfig.me ; echo ""'
+
+export BAT_PAGER='less -R'
